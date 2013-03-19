@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<stack>
+	
+		<!-- First Row -->
+		<ReconCard id="1" img="directions1.png" left="8" right="7" animation-in="fade-in" />
+		<ReconCard id="2" img="directions2.png" left="8" right="7" animation-in="left" />
+		<ReconCard id="3" img="directions3.png" left="8" right="7" animation-in="right" />
+		<ReconCard id="4" img="directions4.png" left="8" right="7" animation-in="up" />
+		<ReconCard id="5" img="directions5.png" left="8" right="7" animation-in="down"/>
+		<ReconCard id="6" img="directions6.png" left="8" right="7" animation-in="fade-in"/>
+		
+		<ReconCard id="7" img="engine.png" left="1" right="8" up="3" down="2" animation-in="left" />
+		<ReconCard id="8" img="map.png" left="7" right="1" down="2" animation-in="left"/>
+	</stack>
+</resources>

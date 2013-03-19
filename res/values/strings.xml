@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ReconCardActivity!</string>
+    <string name="app_name">Recon Cards</string>
+    <string name="not_applicable">Not Applicable</string>
+</resources>
