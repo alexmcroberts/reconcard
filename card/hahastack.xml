@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<stack>
-	
 		<!-- First Row -->
 		<ReconCard id="1" img="directions1.png" left="8" right="7" animation-in="fade-in" />
 		<ReconCard id="2" img="directions2.png" left="8" right="7" animation-in="left" />
