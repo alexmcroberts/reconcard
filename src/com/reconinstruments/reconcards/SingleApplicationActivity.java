@@ -2,8 +2,10 @@ package com.reconinstruments.reconcards;
  
 import com.example.androidlistviewactivity.R;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -136,10 +138,24 @@ public class SingleApplicationActivity extends Activity{
 		return true;
 	}
 	
+	/* The only way to get width / height to build is with these supression warnings */
+	@SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
 	public void showImage(ImageView image, Drawable imageDrawable, String cardDirection, int cardAnimationDuration) {
-    	Display display = getWindowManager().getDefaultDisplay(); 
-    	int width = display.getWidth();
-    	int height = display.getHeight();
+		int version = android.os.Build.VERSION.SDK_INT;
+		int width;
+		int height;
+	    Display display = getWindowManager().getDefaultDisplay(); 
+		if (version >= 13){
+		    Point size = new Point();
+		    display.getSize(size);
+		    width = size.x;
+		    height = size.y;
+		}
+		else {
+		    width = display.getWidth();
+		    height = display.getHeight();
+		}
     	
     	int xStart = 0;
     	int yStart = 0;
