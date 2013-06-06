@@ -65,29 +65,29 @@ public class SingleApplicationActivity extends Activity{
 		if (application.getCards().size() < 1) return false;
 		
 		Log.d(TAG,  "IN LONG PRESS");
-//		
-//		int nextCard = -1;
-//		
-//		try {
-//			ReconCard thisCard = application.getCard(currentCard);
-//	
-//			switch(keyCode) {
-//			case KeyEvent.KEYCODE_DPAD_CENTER:
-//				nextCard = thisCard.getSelectIndex();
-//				break;
-//			}
-//	
-//			if (nextCard > -1) {
-//				Log.d(TAG, "next card: " + nextCard);
-//				setCard(nextCard);
-//			} else if (nextCard == -1){
-//				finish();
-//			}
-//		}
-//		catch ( Exception e ) {
-//			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//		}
-//		
+		
+		int nextCard = -1;
+		
+		try {
+			ReconCard thisCard = application.getCard(currentCard);
+	
+			switch(keyCode) {
+			case KeyEvent.KEYCODE_DPAD_CENTER:
+				nextCard = thisCard.getSelectHoldIndex();
+				break;
+			}
+	
+			if (nextCard > -1) {
+				Log.d(TAG, "next card: " + nextCard);
+				setCard(nextCard);
+			} else if (nextCard == -1){
+				finish();
+			}
+		}
+		catch ( Exception e ) {
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
+		
 		return true;
     }
     
