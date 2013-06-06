@@ -36,8 +36,8 @@ public class ApplicationListViewActivity extends ListActivity {
     }
     
     public void buildApplications() {
-    	String filepath = "/mnt/storage/card";
-    	//String filepath = Environment.getExternalStorageDirectory().getPath() + "/card";
+    	//String filepath = "/mnt/storage/card";
+    	String filepath = Environment.getExternalStorageDirectory().getPath() + "/card";
 		File root = new File(filepath);
 
 		if ( root.exists() ) {
