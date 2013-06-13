@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- yellow_app -->
+<!-- blue_app -->
 <resources>
-	<application name="Yellow App" />
+	<application name="Red App" />
 	<stack>
 		<!-- static images, no animations -->
 		<ReconCard id="1" img="top.png"    left="2" right="4" down="3" select="5" />
