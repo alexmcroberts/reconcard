@@ -2,7 +2,7 @@ package com.reconinstruments.reconcards;
  
 import java.io.File;
 import java.util.ArrayList;
-import com.example.androidlistviewactivity.R;
+import com.reconinstruments.reconcards.multi.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,6 +1,6 @@
 package com.reconinstruments.reconcards;
  
-import com.example.androidlistviewactivity.R;
+import com.reconinstruments.reconcards.multi.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
