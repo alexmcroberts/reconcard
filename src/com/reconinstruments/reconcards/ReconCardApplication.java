@@ -165,7 +165,7 @@ public class ReconCardApplication implements Parcelable, Serializable {
 		String idStr = e.getAttribute("id");
 		String nextStr = e.getAttribute("next");
 		String delayStr = e.getAttribute("delay");
-		String animationInDurationStr = e.getAttribute("animation-in'");
+		String animationInDurationStr = e.getAttribute("animation-in-duration");
 		
 		int up = Integer.MIN_VALUE;
 		int down = Integer.MIN_VALUE;
@@ -177,7 +177,7 @@ public class ReconCardApplication implements Parcelable, Serializable {
 		int id = Integer.MIN_VALUE;
 		int next = Integer.MIN_VALUE;
 		int delay = 0;
-		int animationInDuration = 0;
+		int animationInDuration = 1000; //milliseconds 
 		
 		if(upStr.length() > 0) up = Integer.parseInt(upStr);
 		if(downStr.length() > 0) down = Integer.parseInt(downStr);

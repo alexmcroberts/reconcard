@@ -13,6 +13,7 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class SingleApplicationActivity extends Activity{
 	
 	boolean flagShortPress = false;
 	boolean flagLongPress  = false;
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,29 +64,29 @@ public class SingleApplicationActivity extends Activity{
 		if (application.getCards().size() < 1) return false;
 		
 		Log.d(TAG,  "IN LONG PRESS");
-//		
-//		int nextCard = -1;
-//		
-//		try {
-//			ReconCard thisCard = application.getCard(currentCard);
-//	
-//			switch(keyCode) {
-//			case KeyEvent.KEYCODE_DPAD_CENTER:
-//				nextCard = thisCard.getSelectIndex();
-//				break;
-//			}
-//	
-//			if (nextCard > -1) {
-//				Log.d(TAG, "next card: " + nextCard);
-//				setCard(nextCard);
-//			} else if (nextCard == -1){
-//				finish();
-//			}
-//		}
-//		catch ( Exception e ) {
-//			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//		}
-//		
+		
+		int nextCard = -1;
+		
+		try {
+			ReconCard thisCard = application.getCard(currentCard);
+	
+			switch(keyCode) {
+			case KeyEvent.KEYCODE_DPAD_CENTER:
+				nextCard = thisCard.getSelectHoldIndex();
+				break;
+			}
+	
+			if (nextCard > -1) {
+				Log.d(TAG, "next card: " + nextCard);
+				setCard(nextCard);
+			} else if (nextCard == -1){
+				finish();
+			}
+		}
+		catch ( Exception e ) {
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
+		
 		return true;
     }
     
@@ -182,7 +183,7 @@ public class SingleApplicationActivity extends Activity{
 
     	// populate the image
     	image.setImageDrawable(imageDrawable);
-    	image.bringToFront();
+    	image.setVisibility(View.VISIBLE);
 
     	// only animate if it's requested
     	if ( animationRequested ) {
@@ -233,8 +234,12 @@ public class SingleApplicationActivity extends Activity{
 	    	// select which imageView will we use
 	    	tempImage = (imageToggle) ? imageOne : imageTwo;
 	    	
+	    	Log.v(TAG, "IMAGE " +tempImage.toString());
+	    	
 	    	// invert imageToggle for next time around
 	    	imageToggle = !imageToggle;
+	    	
+	    	Log.v(TAG, "IMAGETOGGLE " +imageToggle);
 	    	
 	    	try {
 	    		Drawable nextBitmap = nextCard.getDrawable();
@@ -242,6 +247,10 @@ public class SingleApplicationActivity extends Activity{
 		    	// show image
 		    	this.showImage(tempImage, nextBitmap, nextCard.getNextCardAnimation(), nextCard.getNextCardAnimationDuration());
 				
+		    	// hide the previous image
+		    	tempImage = (imageToggle) ? imageOne : imageTwo;
+		    	tempImage.setVisibility(View.GONE);
+		    	
 		    	// if next="" an int, show it now!
 				if(nextCard.getNextCard() > -1) {
 					mNextCardRunnable = new NextCardRunnable(nextCard.getNextCard());
