@@ -139,6 +139,11 @@ public class SingleApplicationActivity extends Activity{
 		return true;
 	}
 	
+	@Override 
+	public void onBackPressed() {
+		// DO NOTHING!
+	}
+	
 	/* The only way to get width / height to build is with these supression warnings */
 	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
