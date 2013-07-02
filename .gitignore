@@ -27,3 +27,6 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+# Buck generated files
+buck-out
