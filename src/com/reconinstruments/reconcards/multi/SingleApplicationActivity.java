@@ -1,6 +1,7 @@
-package com.reconinstruments.reconcards;
+package com.reconinstruments.reconcards.multi;
  
 import com.reconinstruments.reconcards.multi.R;
+import com.reconinstruments.reconcards.multi.ReconCardApplication;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,7 +20,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.reconinstruments.reconcards.ReconCardApplication;
  
 public class SingleApplicationActivity extends Activity{
 	public static final String TAG = "SingleListItemActivity";
@@ -139,6 +139,11 @@ public class SingleApplicationActivity extends Activity{
 		}
 		
 		return true;
+	}
+	
+	@Override 
+	public void onBackPressed() {
+		// DO NOTHING!
 	}
 	
 	/* The only way to get width / height to build is with these supression warnings */

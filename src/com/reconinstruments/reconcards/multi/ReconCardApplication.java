@@ -1,4 +1,4 @@
-package com.reconinstruments.reconcards;
+package com.reconinstruments.reconcards.multi;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +19,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.reconinstruments.reconcards.ReconCard;
-// import com.reconinstruments.reconcards.ReconCardActivity.NextCardRunnable;
+import com.reconinstruments.reconcards.multi.ReconCard;
 
 public class ReconCardApplication implements Parcelable, Serializable {
 	/**

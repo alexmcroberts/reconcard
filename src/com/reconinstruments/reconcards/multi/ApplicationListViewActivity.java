@@ -1,8 +1,10 @@
-package com.reconinstruments.reconcards;
+package com.reconinstruments.reconcards.multi;
  
 import java.io.File;
 import java.util.ArrayList;
 import com.reconinstruments.reconcards.multi.R;
+import com.reconinstruments.reconcards.multi.ReconCardApplication;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.reconinstruments.reconcards.ReconCardApplication;
 import android.widget.Toast;
  
 public class ApplicationListViewActivity extends ListActivity {
@@ -37,7 +38,7 @@ public class ApplicationListViewActivity extends ListActivity {
     
     public void buildApplications() {
     	//String filepath = "/mnt/storage/card";
-    	String filepath = Environment.getExternalStorageDirectory().getPath() + "/card";
+    	String filepath = Environment.getExternalStorageDirectory().getPath() + "/multi_card";
 		File root = new File(filepath);
 
 		if ( root.exists() ) {

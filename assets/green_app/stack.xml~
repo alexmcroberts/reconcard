@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- yellow_app -->
+<!-- blue_app -->
 <resources>
-	<application name="Yellow App" />
+	<application name="Blue App" />
 	<stack>
 		<!-- static images, no animations -->
 		<ReconCard id="1" img="top.png"    left="2" right="4" down="3" select="5" />
@@ -14,9 +14,9 @@
 		<ReconCard id="6" img="back.png"   up="1" left="2" down="3" right="4" />
 
 		<!-- images with animations -->
-		<ReconCard id="7"  img="slide_top.png"    left="8" right="7" animation-in="down" />
-		<ReconCard id="8"  img="slide_left.png"   left="8" right="7" animation-in="right" />
-		<ReconCard id="9"  img="slide_bottom.png" left="8" right="7" animation-in="up" />
-		<ReconCard id="10" img="slide_right.png"  left="8" right="7" animation-in="left" />
+		<ReconCard id="7"  img="slide_top.png"    left="8" right="10" down="9" back="6" animation-in="down" />
+		<ReconCard id="8"  img="slide_left.png"   right="10" up="7" down="9" back="6" animation-in="right" />
+		<ReconCard id="9"  img="slide_bottom.png" left="8" right="10" up="7" back="6" animation-in="up" />
+		<ReconCard id="10" img="slide_right.png"  left="8" up="7" down="9" back="6" animation-in="left" />
 	</stack>
 </resources>

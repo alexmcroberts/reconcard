@@ -1,4 +1,4 @@
-package com.reconinstruments.reconcards;
+package com.reconinstruments.reconcards.multi;
 
 import java.io.File;
 import java.io.Serializable;
