@@ -74,6 +74,7 @@ public class SingleApplicationActivity extends Activity{
 	
 			switch(keyCode) {
 			case KeyEvent.KEYCODE_DPAD_CENTER:
+			case KeyEvent.KEYCODE_ENTER:
 				nextCard = thisCard.getSelectHoldIndex();
 				break;
 			}
@@ -121,6 +122,7 @@ public class SingleApplicationActivity extends Activity{
 				break;
 				
 			case KeyEvent.KEYCODE_DPAD_CENTER:
+			case KeyEvent.KEYCODE_ENTER:
 				nextCard = thisCard.getSelectIndex();
 				break;
 			}
