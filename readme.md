@@ -1,15 +1,23 @@
-# Running ReconCardActivity
+# Recon Cards
+Recon Cards is essentially a slideshow app which allows for rapid prototyping of app designs for any Recon HUD. It is possible to link 
+slides together. Actions mentioned in the syntax section below are matched 1:1 to the actions of a typical Android D-Pad.
+
+### Running Recon Cards
 Install using adb from the build directory (find where the .apk is in the project root after the project is built):
 
-    adb install reconcard.apk
+    adb -d install -r reconcard.apk
+    adb -d shell "rm -r /mnt/storage/multi_card/"
+    adb -d shell "mkdir /mnt/storage/multi_card/"
+    adb -d push assets /mnt/storage/multi_card/
+    adb -d shell "am start -n com.reconinstruments.reconcard.multi/com.reconinstruments.reconcard.multi.ApplicationListViewActivity"
 
 The resources you need to modify are the xml file in card, and the png (jpg, bmp also allowed) files that are displayed.
 Once this is more robust, we'll update this readme with the commands that are allowed.
 
 ### Example Resources
 
-There are example resources under the asset folder of this repo. Copy these to "/multi_card" and these "apps" will appear
-in the initial list of apps. These "apps" are identical except for their title, and the assets they point too - the behaviour
+There are example resources under the asset folder of this repo. The last four steps above should how to copy these to "/multi_card".
+These "apps" will appear in the initial screen of the Recon Cards app. These "apps" are identical except for their title, and the assets they point too - the behaviour
 is the same. There is no theoretical limit to the number of "apps" that can be displayed in this list.
 
 ### Syntax
