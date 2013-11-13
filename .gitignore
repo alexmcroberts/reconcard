@@ -1,6 +1,8 @@
 # built application files
 *.apk
 *.ap_
+out
+.gradle
 
 # files for the dex VM
 *.dex
