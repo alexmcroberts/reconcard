@@ -1,9 +1,7 @@
 package com.reconinstruments.reconcards.multi;
- 
+
 import java.io.File;
 import java.util.ArrayList;
-import com.reconinstruments.reconcards.multi.R;
-import com.reconinstruments.reconcards.multi.ReconCardApplication;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -17,88 +15,87 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
- 
+
 public class ApplicationListViewActivity extends ListActivity {
-	public static final String TAG = "AndroidListViewActivity";
-	
-	public ArrayList<String> applications = new ArrayList<String>();
-	public ArrayList<ReconCardApplication> apps = new ArrayList<ReconCardApplication>();
-	
+    private final String TAG = this.getClass().getSimpleName();
+
+    private final Boolean DEBUG = true;
+
+    private final String MULTI_CARD_ROOT_PATH = Environment.getExternalStorageDirectory().getPath() + "/multi_card"; // "/mnt/storage/multi_card"
+
+    public ArrayList<ReconCardApplication> mApps = new ArrayList<ReconCardApplication>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        Log.v(TAG, "building the apps");
-        
-        // find sub folders for cards containing the xml files
-        buildApplications();
 
         setupListView();
     }
-    
-    public void buildApplications() {
-    	//String filepath = "/mnt/storage/card";
-    	String filepath = Environment.getExternalStorageDirectory().getPath() + "/multi_card";
-		File root = new File(filepath);
 
-		if ( root.exists() ) {
-			File[] files = root.listFiles();
-			if ( 0 < files.length ) {
-				for (File file : files) {
-					Log.v(TAG, file.getAbsolutePath().toString());
-				    if (file.isDirectory()) {
-						buildApplication(file);
-				    }
-				}
-			}
-			else {
-				Toast.makeText(getApplicationContext(),
-						"no apps found in " + filepath, Toast.LENGTH_LONG).show();
-			}
-		}
-		else {
-			Toast.makeText(getApplicationContext(), "no card folder found at " + filepath, Toast.LENGTH_LONG).show();
-		}
-	}
-    
-    public void buildApplication(File appFolder) {
-    	Log.v(TAG, "building app: " + appFolder.getAbsolutePath().toString() );
-    	// Check if there is a stack.xml inside each directory and add it to xmlFiles ArrayList<Document>
-    	File[] appFiles = appFolder.listFiles();
-    	if ( 0 < appFiles.length ) {
-    		for (File appFile : appFiles) {
-    			if ( appFile.getName().equalsIgnoreCase("stack.xml") ) {
-    				ReconCardApplication app = new ReconCardApplication( appFile.getAbsolutePath() );
-					if ( null != app ) {
-						apps.add( app );
-						Log.v( TAG, app.name );
-					}
-    			}
-    		}
-    	}
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        Log.v(TAG, "Building the apps...");
+
+        mApps.clear();
+
+        // find sub folders for cards containing the xml files
+        File rootDir = new File(MULTI_CARD_ROOT_PATH);
+
+        if (rootDir.exists()) {
+            createApps(rootDir);
+            if(mApps.size() == 0) {
+                Toast.makeText(getApplicationContext(), "No apps found in " + rootDir.getPath(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "No card folder found at " + rootDir.getPath(), Toast.LENGTH_LONG).show();
+        }
     }
-    
+
+    /**
+     * createApps is a recursive function that traverse through the directory until it finds stack.xml
+     *
+     * @param rootDir
+     */
+    public void createApps(File rootDir) {
+        File[] fileDirList = rootDir.listFiles();
+        if (fileDirList.length < 0) {
+            for (File fileDir : fileDirList) {
+                if (DEBUG) Log.v(TAG, "Searching: " + fileDir.getAbsolutePath().toString() + "...");
+                if (fileDir.isDirectory()) {
+                    createApps(fileDir);
+                } else if (fileDir.isFile() && fileDir.getName().equalsIgnoreCase("stack.xml")) {
+                    ReconCardApplication app = new ReconCardApplication(fileDir.getAbsolutePath());
+                    if (app != null) {
+                        mApps.add(app);
+                        if (DEBUG) Log.v(TAG, "Created a app #" + mApps.size() + ": " + app.name);
+                    }
+                }
+            }
+        }
+    }
+
     public void setupListView() {
         // Binding resources Array to ListAdapter
-        this.setListAdapter( new ArrayAdapter<ReconCardApplication>(this, R.layout.list_item, R.id.label, apps) );
-        
-        ListView lv = getListView();
- 
+        this.setListAdapter(new ArrayAdapter<ReconCardApplication>(this, R.layout.list_item, R.id.label, mApps));
+
+        ListView activityListView = getListView();
+
         // listening to single list item on click
-        lv.setOnItemClickListener(new OnItemClickListener() {
-          public void onItemClick(AdapterView<?> parent, View view,
-              int position, long id) {
- 
-              // selected item
-        	  Log.v(TAG, "APP SELECTED " +apps.get(position).name);
-        	  ReconCardApplication _app = apps.get(position);
- 
-              // Launching new Activity on selecting single List Item
-              Intent i = new Intent(getApplicationContext(), SingleApplicationActivity.class);
-              // sending data to new activity
-              i.putExtra("app", (Parcelable) _app);
-              startActivity(i);
-          }
+        activityListView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // selected item
+                if(DEBUG) Log.v(TAG, "App #" + position + " selected: " + mApps.get(position).name);
+                ReconCardApplication app = mApps.get(position);
+
+                // Launching new Activity on selecting single List Item
+                Intent i = new Intent(getApplicationContext(), SingleApplicationActivity.class);
+                // sending data to new activity
+                i.putExtra("app", (Parcelable) app);
+                startActivity(i);
+            }
         });
     }
 }
