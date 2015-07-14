@@ -1,6 +1,5 @@
 # Recon Cards
-Recon Cards is essentially a slideshow app which allows for rapid prototyping of app designs for any Recon HUD. It is possible to link 
-slides together. Actions mentioned in the syntax section below are matched 1:1 to the actions of a typical Android D-Pad.
+Recon Cards is essentially a slideshow app which allows for rapid prototyping of app designs for any Recon HUD. It is possible to link slides together. Actions mentioned in the syntax section below are matched 1:1 to the actions of a typical Android D-Pad.
 
 ### Running Recon Cards
 Install using adb from the build directory (find where the .apk is in the project root after the project is built):
@@ -34,3 +33,11 @@ is the same. There is no theoretical limit to the number of "apps" that can be d
 
 **Sample:**
     `<ReconCard id="1" img="directions1.png" left="8" right="7" next="2" animation-in="fade-in" />`
+
+### App Hierarchy
+
+Here's a quick breakdown on the hierarchy:
+
+`ApplicationListViewActivity` is the entry point of the app. It builds a ListView which is populated with an ArrayAdaptor of `ReconCardApplication` – with the name of each `ReconCardApplication` being taken from the name element of the application tag in the XML file (e.g. `<application name="Blue App">`. Each `ReconCardApplication` contains a NodeList of `ReconCard`s. Each ReconCard object corresponds to a `<ReconCard>` element in the XML file.
+
+Once a `ReconCardApplication` has been selected from the ListView, a new `SingleApplicationActivity` Activity is launched, and the `ReconCardApplication` is parceled and passed as a Bundle into the `SingleApplicationActivity` Activity. At this point any interactions that occur are driven by the XML definitions of all the `ReconCard` elements.
